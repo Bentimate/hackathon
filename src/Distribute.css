@@ -1,0 +1,27 @@
+.main-wrapper-two {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+input {
+  width: 100%;
+}
+.formStyle {
+  background-color: white;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+button {
+  width: 100%;
+}

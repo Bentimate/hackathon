@@ -27,7 +27,7 @@ export default function FoodTile(props) {
     });
   };
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 200, m: 4 }}>
       <CardActionArea>
         <CardMedia
           component="img"

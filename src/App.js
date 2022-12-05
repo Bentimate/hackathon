@@ -3,8 +3,8 @@ import "./App.css";
 import Home from "./Home";
 import Collect from "./Collect";
 import Distribute from "./Distribute";
-import Thanks from "./Thanks";
 import Admin from "./Admin";
+import Navigation from "./Navigation";
 
 function App() {
   return (
@@ -13,7 +13,6 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="collect" element={<Collect />}></Route>
         <Route path="distribute" element={<Distribute />}></Route>
-        <Route path="thanks" element={<Thanks />}></Route>
         <Route path="admin" element={<Admin />}></Route>
       </Routes>
     </BrowserRouter>

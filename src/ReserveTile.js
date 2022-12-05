@@ -12,7 +12,7 @@ import "./ReserveTile.css";
 export default function ReserveTile(props) {
   const [orders, setOrders] = useState(0);
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 200, m: 4 }}>
       <CardActionArea>
         <CardMedia
           component="img"

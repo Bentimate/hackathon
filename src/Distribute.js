@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import ReactDOM from "react-dom";
-import "./Home.css";
+import "./Distribute.css";
 import Button from "@mui/material/Button";
 import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import { doc, addDoc, collection } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "./firebaseconfig";
+import positions from "@mui/system";
+
+import CircularProgress, {
+  CircularProgressProps,
+} from "@mui/material/CircularProgress";
 
 Modal.setAppElement("#root");
 
@@ -74,7 +79,7 @@ const Distribute = () => {
   };
 
   return (
-    <div className="main-wrapper" id="add-event-modal">
+    <div className="main-wrapper-two">
       <Paper elevation={3} variant="outlined" square>
         {/* <Link to="/create"> */}
         <Button variant="contained" onClick={openModal}>
@@ -85,30 +90,44 @@ const Distribute = () => {
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
-            Create Supper Event
-          </h2>
-          <p>
-            <button onClick={closeModal}>quit</button>
-          </p>
-          <form onSubmit={handleSubmit}>
-            <p>
-              <label for="name">Name: </label>
-              <input type="text" id="name" />
-            </p>
-            <p>
-              <label for="picture">Picture: </label>
-              <input type="file" id="picture" />
-            </p>
+          <div className="modal">
+            <Paper elevation={24} variant="outlined" sx={{ width: 400, m: 4 }}>
+              <div className="formStyle">
+                <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
+                <h1>Create Supper Event</h1>
 
-            <p>
-              <input type="date" id="date" />
-            </p>
-            <p>
-              <button type="submit">Upload</button>
-              {progress}
-            </p>
-          </form>
+                <form onSubmit={handleSubmit}>
+                  <p>
+                    <label for="name">Name: </label>
+                    <input type="text" id="name" />
+                  </p>
+                  <p>
+                    <label for="picture">Picture: </label>
+                    <input type="file" id="picture" />
+                  </p>
+
+                  <p>
+                    <input type="date" id="date" />
+                  </p>
+                  <p>
+                    <Button type="submit" variant="contained">
+                      Upload
+                    </Button>
+                    {/* {progress < 100 && (
+                  <CircularProgress variant="determinate" value={progress} />
+                )} */}
+                  </p>
+                  <Button
+                    onClick={closeModal}
+                    variant="outlined"
+                    backgroundColor="red"
+                  >
+                    Quit without saving
+                  </Button>
+                </form>
+              </div>
+            </Paper>
+          </div>
         </Modal>
         {/* </Link> */}
       </Paper>
