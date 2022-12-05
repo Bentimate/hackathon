@@ -7,15 +7,14 @@ import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import { doc, addDoc, collection } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import db from "./firebaseconfig";
-import storage from "./firebaseconfig.js";
+import { db, storage } from "./firebaseconfig";
 
 Modal.setAppElement("#root");
 
 const Distribute = () => {
   let subtitle;
-  const [imgUrl, setImgUrl] = useState("");
-  const [percent, setProgresspercent] = useState("");
+  const [imgUrl, setImgUrl] = useState(null);
+  const [progress, setProgresspercent] = useState(0);
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [file, setFile] = useState("");
   function openModal() {
@@ -37,9 +36,7 @@ const Distribute = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const file = e.target[0]?.files[0];
-    console.log(file);
-
+    const file = e.target[1]?.files[0];
     if (!file) return;
 
     const storageRef = ref(storage, `files/${file.name}`);
@@ -59,6 +56,18 @@ const Distribute = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImgUrl(downloadURL);
+          const name = document.getElementById("name").value;
+
+          const date = document.getElementById("date").value;
+          const dbRef = collection(db, "suppers");
+          const data = {
+            name: name,
+            image: downloadURL,
+            date: date.toString(),
+            counter: 0,
+          };
+
+          addDoc(dbRef, data);
         });
       }
     );
@@ -82,40 +91,22 @@ const Distribute = () => {
           <p>
             <button onClick={closeModal}>quit</button>
           </p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <p>
-              {/* <label for="name">Name: </label> */}
+              <label for="name">Name: </label>
               <input type="text" id="name" />
             </p>
             <p>
-              {/* <label for="picture">Picture: </label> */}
-              <input type="file" id="picture" onChange={handleChange} />
+              <label for="picture">Picture: </label>
+              <input type="file" id="picture" />
             </p>
+
             <p>
-              {/* <label for="date">Name: </label> */}
               <input type="date" id="date" />
             </p>
             <p>
-              <button
-                onClick={(e) => {
-                  const name = document.getElementById("name").value;
-                  const picture = document.getElementById("picture").value;
-                  const date = document.getElementById("date").value;
-
-                  handleSubmit(e);
-                  const dbRef = collection(db, "suppers");
-                  const data = {
-                    name: name,
-                    image: picture,
-                    date: date.toString(),
-                    counter: 0,
-                  };
-
-                  addDoc(dbRef, data);
-                }}
-              >
-                Create Event
-              </button>
+              <button type="submit">Upload</button>
+              {progress}
             </p>
           </form>
         </Modal>

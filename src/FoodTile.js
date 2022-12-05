@@ -14,7 +14,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { useState } from "react";
-import db from "./firebaseconfig";
+import { db } from "./firebaseconfig";
 
 export default function FoodTile(props) {
   const [isDisabled, setDisabled] = useState(false);

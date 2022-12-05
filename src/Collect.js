@@ -1,6 +1,6 @@
 import "./Home.css";
 import { collection, getDocs, setDoc, increment } from "firebase/firestore";
-import db from "./firebaseconfig";
+import { db } from "./firebaseconfig";
 import FoodTile from "./FoodTile";
 import React, { useState, useEffect } from "react";
 

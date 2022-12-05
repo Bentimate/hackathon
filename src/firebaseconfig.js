@@ -22,10 +22,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // init services
-const db = getFirestore();
+export const db = getFirestore();
 
 export const storage = getStorage(app);
-export default db;
 
 /* 
 
