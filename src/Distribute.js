@@ -3,12 +3,13 @@ import Modal from "react-modal";
 import ReactDOM from "react-dom";
 import "./Distribute.css";
 import Button from "@mui/material/Button";
-import { Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import { doc, addDoc, collection } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "./firebaseconfig";
 import positions from "@mui/system";
+import { Paper, Toolbar, Box } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
 
 import CircularProgress, {
   CircularProgressProps,
@@ -79,6 +80,24 @@ const Distribute = () => {
   };
 
   return (
+    <div>
+      <AppBar sx={{ bgcolor: "black" }}>
+        <Toolbar>
+          <div className="logo">
+            <Box
+              component="img"
+              sx={{
+                height: 30,
+                width: 30,
+                mr: 1,
+              }}
+              alt="The house from the offer."
+              src="hamburger.png"
+            />
+            <p> Super Supper</p>
+          </div>
+        </Toolbar>
+      </AppBar>
     <div className="main-wrapper-two">
       <Paper elevation={3} variant="outlined" square>
         {/* <Link to="/create"> */}
@@ -136,6 +155,7 @@ const Distribute = () => {
           <Button variant="contained">View Orders</Button>
         </Link>
       </Paper>
+    </div>
     </div>
   );
 };

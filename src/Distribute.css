@@ -4,6 +4,9 @@
   height: 100vh;
   align-items: center;
   justify-content: space-evenly;
+  background-image: url("/public/background2.jpg");
+  background-repeat: no-repeat;
+  background-size: 100vw;
 }
 
 .modal {
